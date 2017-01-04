@@ -1,0 +1,146 @@
+/* The main header is being floated left to make sure there is room for the hamburger menu once it goes into mobile view. */
+.heading-group-h1 {
+  float: left;
+  padding: 0 0 .2em 1em;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Lato:900);
+*, *:before, *:after{
+  box-sizing:border-box;
+}
+body{
+  font-family: 'Lato', sans-serif;
+    ;
+}
+div.page-header{
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+.letter{
+  display: inline-block;
+  font-weight: 900;
+  font-size: 2em;
+  margin: 0.2em;
+  position: relative;
+  color: #00B4F1;
+  transform-style: preserve-3d;
+  perspective: 400;
+  z-index: 1;
+}
+.letter:before, .letter:after{
+  position:absolute;
+  content: attr(data-letter);
+  transform-origin: top left;
+  top:0;
+  left:0;
+}
+.letter, .letter:before, .letter:after{
+  transition: all 0.3s ease-in-out;
+}
+.letter:before{
+  color: #4EC5C1;
+  text-shadow:
+    -1px 0px 1px rgba(255,255,255,.8),
+    1px 0px 1px rgba(0,0,0,.8);
+  z-index: 3;
+  transform:
+    rotateX(0deg)
+    rotateY(-15deg)
+    rotateZ(0deg);
+}
+.letter:after{
+  color: rgba(0,0,0,.11);
+  z-index:2;
+  transform:
+    scale(1.08,1)
+    rotateX(0deg)
+    rotateY(0deg)
+    rotateZ(0deg)
+    skew(0deg,1deg);
+}
+.letter:hover:before{
+  color: #fafafa;
+  transform:
+    rotateX(0deg)
+    rotateY(-40deg)
+    rotateZ(0deg);
+}
+.letter:hover:after{
+  transform:
+    scale(1.08,1)
+    rotateX(0deg)
+    rotateY(40deg)
+    rotateZ(0deg)
+    skew(0deg,22deg);
+}
+
+#page-div {
+  width: 450px;
+  height: 100px;
+}
+
+.icon-menu {
+  /* Floating the hamburger menu to the right so the list can float to the left and show on the other side. Also adding the font size for the hamburger menu. */
+  font-size: 2em;
+  float: right;
+}
+.main-nav {
+  padding: 0.1em;
+}
+.nav-menu ul {
+  /* I am hiding the main nav list because we only want it to display once the media queries quick in (we are assuming that the UI is in mobile view), so then we can have our hamburger icon take its place and once the user hovers over that, they are able to see our list. */
+  display: none;
+  list-style: none;
+  clear: both;
+  padding: 0;
+}
+.nav-menu:hover ul {
+  display: block;
+}
+
+
+/*nav:hover .tab-list {
+  display: block;
+  width: 960px;
+  list-style-type: none;
+  border-bottom: none;
+}*/
+
+/*nav .icon-menu {
+  float: right;
+}*/
+/* I am hiding the hamburger and displaying out unordered lists. It will all appear on one row.
+*/
+.nav-menu li {
+  margin: 0 0 0 .4em;
+  padding: .5em .2em;
+  font-size: 1em;
+}
+
+li {
+  width: 65px;
+}
+/*li .tab {
+  display: block;
+  width: 960px;
+}*/
+
+.template {
+  display: none;
+}
+
+@media only screen and (min-width: 640px) {
+  .icon-menu {
+    display: none;
+  }
+  .nav-menu {
+    padding: 2px 2px 2px 6px;
+  }
+  .nav-menu ul {
+    display: block;
+  }
+  .nav-menu ul li {
+    display: inline-block;
+    padding: 10px 40px;
+  }
