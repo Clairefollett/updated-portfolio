@@ -1,4 +1,4 @@
-var data = [
+var portfolioData = [
   {
     title: 'About Me',
     category: 'JavaScript',
