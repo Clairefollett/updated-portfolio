@@ -1,29 +1,20 @@
+/*Assigning the site heading with a max-width of 80%*/
 .heading-group-h1 {
   max-width: 80%;
 }
-
+/*Giving the icon-menu the hamburger font*/
 .icon-menu::before {
   content: "\2630";
 }
-
+/*Cleafixing because we are using float on a lot of elements*/
 .clearfix::after {
   content: "";
   display: table;
   clear: both;
 }
-/*h1 {
-  width: 960px;
-  border-bottom-color: solid blue;
-  padding: 5px;
-}*/
-/*.nav-menu {
-  float: left;
-}*/
-/*nav ul li {
-  list-style-type: none;
-  padding: 8px 0 0 0;
-}*/
+
 @media only screen and (min-width: 640px) {
+  /*When the query kicks in, we change the site header from foating left to not floating. We give it some padding as well.*/
   .heading-group-h1 {
     padding: .1em .1em .1em .1em;
     float: none;

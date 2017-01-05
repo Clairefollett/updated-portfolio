@@ -3,7 +3,7 @@
   float: left;
   padding: 0 0 .2em 1em;
 }
-
+/*This is for my site header, I found it online:*/
 @import url(http://fonts.googleapis.com/css?family=Lato:900);
 *, *:before, *:after{
   box-sizing:border-box;
@@ -74,7 +74,7 @@ div.page-header{
     rotateZ(0deg)
     skew(0deg,22deg);
 }
-
+/*this is to help position the site header*/
 #page-div {
   width: 450px;
   height: 100px;
@@ -85,61 +85,46 @@ div.page-header{
   font-size: 2em;
   float: right;
 }
+
 .main-nav {
   padding: 0.1em;
 }
 .nav-menu ul {
-  /* I am hiding the main nav list because we only want it to display once the media queries quick in (we are assuming that the UI is in mobile view), so then we can have our hamburger icon take its place and once the user hovers over that, they are able to see our list. */
+  /* I am hiding the main nav list because we only want it to display once the media queries kick in (we are assuming that the UI is in mobile view), so then we can have our hamburger icon take its place and once the user hovers over that, they are able to see our list and the hamburger menu icon dissapears. */
   display: none;
   list-style: none;
   clear: both;
   padding: 0;
 }
+/*Displaying the nav menu when we hover over the hamburger icon menu*/
 .nav-menu:hover ul {
   display: block;
 }
 
-
-/*nav:hover .tab-list {
-  display: block;
-  width: 960px;
-  list-style-type: none;
-  border-bottom: none;
-}*/
-
-/*nav .icon-menu {
-  float: right;
-}*/
-/* I am hiding the hamburger and displaying out unordered lists. It will all appear on one row.
-*/
 .nav-menu li {
   margin: 0 0 0 .4em;
   padding: .5em .2em;
   font-size: 1em;
 }
-
-li {
-  width: 65px;
-}
-/*li .tab {
-  display: block;
-  width: 960px;
-}*/
-
+/*Hiding the templates*/
 .template {
   display: none;
 }
 
 @media only screen and (min-width: 640px) {
+  /*Hiding the hamburger menu for mobile view*/
   .icon-menu {
     display: none;
   }
+  /*Giving the nav-menu some padding for visiual display*/
   .nav-menu {
     padding: 2px 2px 2px 6px;
   }
+  /*Displaying the nav menu*/
   .nav-menu ul {
     display: block;
   }
+  /*Displaying each list item in the nav-menu inlne and giving it some padding*/
   .nav-menu ul li {
     display: inline-block;
     padding: 10px 40px;
