@@ -28,7 +28,7 @@
       <nav class="nav-menu">
         <div class="icon-menu"></div>
         <ul class="tab-list">
-          <li class="tab" data-content="projects"><a href="#" class="icon-home"> Home</a></li>
+          <li class="tab" data-content="articles"><a href="#" class="icon-home"> Home</a></li>
           <li class="tab" data-content="about"><a href="#" class="icon-woman"> About</a></li>
           <li><a href="https://www.facebook.com" target="_blank" class="icon-facebook2"> Facebook</a></li>
           <li><a href="https://github.com/Clairefollett" target="_blank" class="icon-github"> GitHub</a></li>
@@ -36,8 +36,22 @@
       </nav>
     </header>
     <main>
-      <section id="articles">
-        <article class="template" data-category="cat">
+      <section id="articles" class="tab-content">
+        <div>
+          <ul id="filters">
+            <li>
+              <select id="author-filter">
+                <option value="">-- Filter by Authors --</option>
+              </select>
+            </li>
+            <li>
+              <select id="category-filter">
+                <option value="">-- Filter by Categories --</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+        <article class="template" data-category="placeholder-category">
             <header>
               <h1>Title</h1>
               <div class="byline">
@@ -46,10 +60,28 @@
               </div>
             </header>
             <section class="article-body"></section>
+            <a href="#" class="read-on">Read on &rarr;</a>
         </article>
+      </section>
+      <section id="about" class="tab-content">
+        <header>
+          Claire's Portfolio
+        </header>
+        <section>
+          <h1>About Me:</h1>
+          <ul>
+            <li>Coding</li>
+            <li>Schnoodles</li>
+            <li>Family and friends!</li>
+          </ul>
+        </section>
       </section>
     </main>
     <footer>
     </footer>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="scripts/portfolioDocuments.js"></script>
+    <script type="text/javascript" src="scripts/portfolio.js"></script>
+    <script type="text/javascript" src="scripts/portfolioView.js"></script>
   </body>
 </html>
