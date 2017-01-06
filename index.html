@@ -10,7 +10,19 @@
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/module.css">
-
+    <script id="article-template" type="text/x-handlebars-template">
+      <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
+        <header>
+          <h1>{{Title}}</h1>
+          <div class="byline">
+            By <address><a href="{{authorUrl}}">{{author}}</a></address>
+            {{publishStatus}}
+          </div>
+        </header>
+        <section class="article-body">{{{body}}}</section>
+        <a href="" class="read-on">Read on &rarr;</a>
+      </article>
+    </script>
   </head>
   <body>
     <header class="site-header clearfix">
@@ -51,17 +63,6 @@
             </li>
           </ul>
         </div>
-        <article class="template" data-category="placeholder-category">
-            <header>
-              <h1>Title</h1>
-              <div class="byline">
-                By <address><a href="">Author Name</a></address>
-                published <time pubdate datetime="2000-01-01">Publish Time</time>
-              </div>
-            </header>
-            <section class="article-body"></section>
-            <a href="#" class="read-on">Read on &rarr;</a>
-        </article>
       </section>
       <section id="about" class="tab-content">
         <header>
@@ -80,6 +81,7 @@
     <footer>
     </footer>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
     <script type="text/javascript" src="scripts/portfolioDocuments.js"></script>
     <script type="text/javascript" src="scripts/portfolio.js"></script>
     <script type="text/javascript" src="scripts/portfolioView.js"></script>

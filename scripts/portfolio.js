@@ -10,20 +10,14 @@ function Portfolio (opts) {
 }
 
 Portfolio.prototype.toHtml = function () {
-  var $newPortfolio = $('article.template').clone();
-  $newPortfolio.removeClass('template');
-  $newPortfolio.attr('data-author', this.author);
-  $newPortfolio.attr('data-category', this.category);
+  var source = $('#article-template').html();
+  var template = Handlebars.compile(source);
 
-  $newPortfolio.find('.byline a').text(this.author);
-  $newPortfolio.find('.byline a').attr('href', this.authorUrl);
-  $newPortfolio.find('h1:first').html(this.title);
-  $newPortfolio.find('.article-body').html(this.body);
-  $newPortfolio.find('time[pubdate]').attr('datetime', this.publishedOn);
-  $newPortfolio.find('time[pubdate]').attr('title', this.publishedOn);
-  $newPortfolio.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago');
+  this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
+  this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
+  var html = template(this);
 
-  return $newPortfolio;
+  return html;
 };
 
 data.sort(function(a, b) {
