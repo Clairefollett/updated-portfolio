@@ -107,8 +107,11 @@ portfolioView.renderIndex = function() {
   portfolioView.handleMainNav();
   portfolioView.setTeasers();
 };
+var retrieveFile =  localStorage.getItem('getStatus');
 
 $.getJSON('data/portfolio.json').done( function(data) {
   Portfolio.sortDataAndPush(data);
   portfolioView.renderIndex();
+}).fail(function() {
+  console.log('fail');
 });

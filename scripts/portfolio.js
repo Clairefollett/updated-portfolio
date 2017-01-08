@@ -1,15 +1,15 @@
 //var portfolio = [];
+Portfolio.portfolios = [];
+
+localStorage.setItem('getStatus', 'false');
 
 function Portfolio (opts) {
-  this.title = opts.title;
-  this.category = opts.category;
-  this.author = opts.author;
-  this.authorUrl = opts.authorUrl;
-  this.publishedOn = opts.publishedOn;
-  this.body = opts.body;
+  for (keys in opts) {
+    this[keys] = opts[keys];
+  }
 }
 
-Portfolio.portfolios = [];
+
 
 Portfolio.prototype.toHtml = function (scriptTemplateId) {
   //var source = $('#article-template').html();
