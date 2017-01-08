@@ -10,7 +10,26 @@
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/module.css">
-
+    <link rel="stylesheet" href="styles/normalize.css">
+    <script id="article-template" type="text/x-handlebars-template">
+      <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
+        <header>
+          <h1>{{title}}</h1>
+          <div class="byline">
+            By <address><a href="{{authorUrl}}">{{author}}</a></address>
+            {{publishedOn}}
+          </div>
+        </header>
+        <section class="article-body">{{{body}}}</section>
+        <a href="" class="read-on">Read on &rarr;</a>
+      </article>
+    </script>
+    <script id="author-filter-template" type="text/x-handlebars-template">
+      <option value="{{author}}">{{author}}</option>
+     </script>
+     <script id="category-filter-template" type="text/x-handlebars-template">
+      <option value="{{category}}">{{category}}</option>
+     </script>
   </head>
   <body>
     <header class="site-header clearfix">
@@ -28,7 +47,7 @@
       <nav class="nav-menu">
         <div class="icon-menu"></div>
         <ul class="tab-list">
-          <li class="tab" data-content="projects"><a href="#" class="icon-home"> Home</a></li>
+          <li class="tab" data-content="articles"><a href="#" class="icon-home"> Home</a></li>
           <li class="tab" data-content="about"><a href="#" class="icon-woman"> About</a></li>
           <li><a href="https://www.facebook.com" target="_blank" class="icon-facebook2"> Facebook</a></li>
           <li><a href="https://github.com/Clairefollett" target="_blank" class="icon-github"> GitHub</a></li>
@@ -36,20 +55,44 @@
       </nav>
     </header>
     <main>
-      <section id="articles">
-        <article class="template" data-category="cat">
-            <header>
-              <h1>Title</h1>
-              <div class="byline">
-                By <address><a href="">Author Name</a></address>
-                published <time pubdate datetime="2000-01-01">Publish Time</time>
-              </div>
-            </header>
-            <section class="article-body"></section>
-        </article>
+      <section id="articles" class="tab-content">
+        <div>
+          <ul id="filters">
+            <li>
+              <select id="author-filter">
+                <option value="">-- Filter by Authors --</option>
+              </select>
+            </li>
+            <li>
+              <select id="category-filter">
+                <option value="">-- Filter by Categories --</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="about" class="tab-content">
+        <header>
+          Claire's Portfolio
+        </header>
+        <section>
+          <h1>About Me:</h1>
+          <ul>
+            <li>Coding</li>
+            <li>Schnoodles</li>
+            <li>Family and friends!</li>
+          </ul>
+        </section>
       </section>
     </main>
     <footer>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+    <script src="vendor/marked.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js"></script>
+    <!--script type="text/javascript" src="scripts/portfolioDocuments.js"></script-->
+    <script type="text/javascript" src="scripts/portfolio.js"></script>
+    <script type="text/javascript" src="scripts/portfolioView.js"></script>
   </body>
 </html>
