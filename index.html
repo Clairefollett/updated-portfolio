@@ -17,7 +17,7 @@
           <h1>{{title}}</h1>
           <div class="byline">
             By <address><a href="{{authorUrl}}">{{author}}</a></address>
-            {{publishedOn}}
+            {{publishStatus}}
           </div>
         </header>
         <section class="article-body">{{{body}}}</section>
@@ -88,10 +88,13 @@
     <footer>
     </footer>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-    <script src="vendor/marked.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js"></script>
+    <script src="vendor/handlebars.js"></script>
+    <srcipt src="vendor/marked.js"></script>
     <!--script type="text/javascript" src="scripts/portfolioDocuments.js"></script-->
-    <script type="text/javascript" src="scripts/portfolio.js"></script>
-    <script type="text/javascript" src="scripts/portfolioView.js"></script>
+    <script src="data/portfolio.json"></script>
+    <script type="text/javascript" src="scripts/views/portfolioView.js"></script>
+    <script type="text/javascript" src="scripts/models/portfolio.js"></script>
+
+    <!--script type="text/javascript" src="scripts/views/indexPage.js"></script-->
   </body>
 </html>
