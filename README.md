@@ -1,11 +1,11 @@
 ![CF](https://i.imgur.com/7v5ASc8.png)  Lab 07: Functional Programming
-=======
 
 The concepts of functional programming have significantly shaped Computer Science from the early days.
 
 Apply some "FP" concepts to the MVC Blog!
 
-We'll make an "admin" page, which will show some stats on how authors on the blog are doing. In the end, it will looks [something like this](https://cf-mvc-blog--class07.aerobatic.io/admin.html).
+We'll make an "admin" page, which will show some stats on how authors on the blog are doing. In the end, it will looks [something like this]
+(https://cf-mvc-blog--class07.aerobatic.io/admin.html).
 
 Today there are many TODO items, but they are (mostly) smaller bites.
 
@@ -21,3 +21,4 @@ Today there are many TODO items, but they are (mostly) smaller bites.
 
 ## Stretch Goals:
 - What statistical analysis would be of interest to you with this data set? Code it up!  
+# updated-portfolio
