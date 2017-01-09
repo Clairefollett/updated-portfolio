@@ -12,36 +12,17 @@
     var template = Handlebars.compile($(scriptTemplateId).text());
     this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
     this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
-  //var html = template(this);
     this.body = marked(this.body);
     return template(this);
-  //return html;
   };
-  Portfolio.loadAll = function (dataWePassIn) {
+
+  Portfolio.loadAll = function(dataWePassIn) {
     Portfolio.portfolios = dataWePassIn.sort(function(a,b) {
       return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
     }).map(function(ele) {
       return new Portfolio(ele);
     });
   };
-
-  portfolioView.renderIndexPage=function() {
-    Portfolio.portfolios.forEach(function(a) {
-      $('#articles').append(a.toHtml('#article-template'));
-      if ($('#category-filter option:contains("' + a.category + '")').length === 0) {
-        $('#category-filter').append(a.toHtml('#category-filter-template'));
-      };
-      if ($('#author-filter option:contains("' + a.author + '")').length === 0) {
-        $('#author-filter').append(a.toHtml('#author-filter-template'));
-      };
-    });
-
-    portfolioView.handleAuthorFilter();
-    portfolioView.handleCategoryFilter();
-    portfolioView.handleMainNav();
-    portfolioView.setTeasers();
-  };
-
 
   Portfolio.fetchAll = function(nextFunction) {
     if (localStorage.portfolio) {
@@ -55,7 +36,6 @@
             Portfolio.getAll(nextFunction);
           } else {
             Portfolio.loadAll(JSON.parse(localStorage.portfolio));
-
             nextFunction();
           }
         }
@@ -69,7 +49,6 @@
     $.getJSON('/data/portfolio.json', function(responseData) {
       Portfolio.loadAll(responseData);
       localStorage.portfolio = JSON.stringify(responseData);
-
       nextFunction();
     });
   };
@@ -97,9 +76,10 @@
 
   Portfolio.numWordsByAuthor = function() {
     return Portfolio.allAuthors().map(function(author) {
+      console.log(author);
       return {
         name: author,
-        numwords: Portfolio.portfolios.filter(function(curArticle) {
+        numWords: Portfolio.portfolios.filter(function(curArticle) {
           if (author === curArticle.author) {return true;}
         })
         .map(function(curArticle) {
@@ -111,6 +91,5 @@
       };
     });
   };
-
   module.Portfolio = Portfolio;
 })(window);

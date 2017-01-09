@@ -8,7 +8,8 @@
         $('article').hide();
         $('article[data-author="' + $(this).val() + '"]').fadeIn(2000);
       } else {
-        $('article').not('.template').fadeIn(3000);
+        $('article').fadeIn();
+        $('article.template').hide();
       }
       $('#category-filter').val('');
     });
@@ -20,7 +21,8 @@
         $('article').hide();
         $('article[data-category="' + $(this).val() + '"]').fadeIn(2000);
       } else {
-        $('article').not('.template').fadeIn(3000);
+        $('article').fadeIn();
+        $('article.template').hide();
       }
       $('#author-filter').val('');
     });
