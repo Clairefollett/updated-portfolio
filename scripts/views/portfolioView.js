@@ -27,13 +27,13 @@
     });
   };
 
-  portfolioView.handleMainNav = function () {
+  /*portfolioView.handleMainNav = function () {
     $('.nav-menu').on('click', '.tab', function(e) {
       $('.tab-content').hide();
       $('#' + $(this).data('content')).fadeIn(2000);
     });
     $('.nav-menu .tab:first').click();
-  };
+  };*/
 
   portfolioView.setTeasers = function() {
     $('h2').prev('p').remove();
@@ -65,7 +65,7 @@
     });
     portfolioView.handleAuthorFilter();
     portfolioView.handleCategoryFilter();
-    portfolioView.handleMainNav();
+    //portfolioView.handleMainNav();
     portfolioView.setTeasers();
   };
   Portfolio.fetchAll(portfolioView.renderIndex);

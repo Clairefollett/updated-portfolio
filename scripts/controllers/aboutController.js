@@ -1,5 +1,5 @@
 (function(module) {
-  var aboutControlller = {};
+  var aboutController = {};
 
   aboutController.reveal = function() {
     $('section[id="articles"]').hide();
