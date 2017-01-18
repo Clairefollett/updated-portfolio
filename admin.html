@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Claire Follett's Portfolio</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio Statistics</title>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/module.css">
+    <link rel="stylesheet" href="styles/normalize.css">
+
+    <script id="author-template" type="text/x-handlebars-template">
+      <li><strong>{{name}}</strong>: {{numWords}} words written</li>
+    </script>
+    </head>
+    <body>
+      <header class="site-header clearfix">
+        <section class="heading-group-h1 pull-left">
+          <h1>
+            Claire Follett's Portfolio!
+          </h1>
+        </section>
+        <nav class="nav-menu">
+          <div class="icon-menu"></div>
+          <ul>
+          <li class="tab"><a href="index.html" class="icon-home"></a>Portfolio</li>
+          <li class="tab"><a href="admin.html"></a>Stats</li>
+        </ul>
+      </nav>
+    </header>
+    <main class="clearfix">
+      <h1>Portfolio Stats</h1>
+      <section id="blog-stats">
+        <dt>Total articles:</dt> <dd class="articles"></dd>
+        <dt>Total words:</dt> <dd class="words"></dd>
+        <h2>Author Stats</h2>
+        <p><em>Details on who is writing, and how much writing they are doing...</em></p>
+        <ul class="author-stats">
+        </ul>
+      </section>
+    </main>
+    <footer>
+    </footer>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="vendor/handlebars.js"></script>
+    <script src="vendor/marked.js"></script>
+    <script src="scripts/models/portfolio.js"></script>
+    <script type="text/javascript" src="scripts/views/portfolioView.js"></script>
+    <script type="text/javascript" src="scripts/views/adminPage.js"></script>
+  </body>
+</html>
