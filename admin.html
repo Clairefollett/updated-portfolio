@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/module.css">
-    <link rel="stylesheet" href="styles/normalize.css">
 
     <script id="author-template" type="text/x-handlebars-template">
       <li><strong>{{name}}</strong>: {{numWords}} words written</li>
@@ -45,9 +44,11 @@
     <footer>
     </footer>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="vendor/jquery-2.1.4.js"></script>
     <script src="vendor/handlebars.js"></script>
-    <script src="vendor/marked.js"></script>
+    <!-- Model Files -->
     <script src="scripts/models/portfolio.js"></script>
+    <!-- View Files -->
     <script type="text/javascript" src="scripts/views/portfolioView.js"></script>
     <script type="text/javascript" src="scripts/views/adminPage.js"></script>
   </body>
