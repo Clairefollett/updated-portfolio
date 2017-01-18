@@ -1,10 +1,9 @@
 (function(module) {
   function Portfolio (opts) {
-    for (key in opts) {
-      this[key] = opts[key];
-    }
+    Object.keys(opts).forEach(function(element) {
+      this[element] = opts[element];
+    }, this);
   }
-
 
   Portfolio.portfolios = [];
 
@@ -12,66 +11,109 @@
     var template = Handlebars.compile($(scriptTemplateId).text());
     this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
     this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
-    this.body = marked(this.body);
     return template(this);
   };
 
-  Portfolio.loadAll = function(dataWePassIn) {
-    Portfolio.portfolios = dataWePassIn.sort(function(a,b) {
-      return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
-    }).map(function(ele) {
+  Portfolio.createTable = function () {
+    webDB.execute(
+      'CREATE TABLE IF NOT EXISTS portfolios (' +
+      'id INTEGER PRIMARY KEY, ' +
+      'title VARCHAR(255) NOT NULL, ' +
+      'author VARCHAR(255) NOT NULL, ' +
+      'authorUrl VARCHAR (255), ' +
+      'category VARCHAR(20), ' +
+      'publishedOn DATETIME, ' +
+      'body TEXT NOT NULL);',
+    function() {
+      console.log('Successfully set up the portfolios table.');
+    });
+  };
+
+  Portfolio.truncateTable = function() {
+    webDB.execute(
+      'DELETE FROM portfolios;'
+    );
+  };
+
+  Portfolio.prototype.insertRecord = function() {
+    webDB.execute(
+      [
+        {
+          'sql': 'INSERT INTO portfolios (title, author, authorUrl, category, publishedOn, body) VALUES (?,?,?,?,?,?);',
+          'data': [this.title, this.author, this.authorUrl, this.category, this.publishedOn, this.body],
+        }
+      ]
+    );
+  };
+
+  Portfolio.prototype.deleteRecord = function() {
+    webDB.execute(
+      [
+        {
+          'sql': 'DELETE FROM portfolios WHERE id = ?;',
+          'data': [this.id]
+        }
+      ]
+    );
+  };
+
+  //updaterecord
+  Portfolio.prototype.updateRecord = function () {
+    webDB.execute(
+      [
+        {
+          'sql': 'UPDATE portfolios SET title = ?, author = ?, authorUrl = ?, category = ?, publishedOn = ?, body = ? WHERE ID = ?;',
+          'data': [this.title, this.author, this.authorUrl, this.category, this.punlishedOn, this.body, this.id]
+        }
+      ]
+    );
+  };
+
+  Portfolio.loadAll = function(rows) {
+    Portfolio.portfolios = rows.map(function(ele) {
       return new Portfolio(ele);
     });
   };
 
-  Portfolio.fetchAll = function(nextFunction) {
-    if (localStorage.portfolio) {
-      $.ajax({
-        type: 'HEAD',
-        url: '/data/portfolio.json',
-        success: function(data, message, xhr) {
-          var eTag = xhr.getResponseHeader('eTag');
-          if (!localStorage.eTag || eTag !== localStorage.eTag) {
-            localStorage.eTag = eTag;
-            Portfolio.getAll(nextFunction);
-          } else {
-            Portfolio.loadAll(JSON.parse(localStorage.portfolio));
-            nextFunction();
-          }
-        }
-      });
-    } else {
-      Portfolio.getAll(nextFunction);
-    }
-  };
-
-  Portfolio.getAll = function(nextFunction) {
-    $.getJSON('/data/portfolio.json', function(responseData) {
-      Portfolio.loadAll(responseData);
-      localStorage.portfolio = JSON.stringify(responseData);
-      nextFunction();
+  Portfolio.fetchAll = function(next) {
+    webDB.execute('SELECT * FROM portfolios ORDER BY publishedOn DESC', function(rows) {
+      if (rows.length) {
+        Portfolio.loadAll(rows);
+        next();
+      } else {
+        $.getJSON('/data/portfolio.json', function(rawData) {
+          rawData.forEach(function(item) {
+            var portfolio = new Portfolio(item);
+            portfolio.insertRecord();
+          });
+          webDB.execute('SELECT * FROM portfolios ORDER BY publishedOn DESC', function(rows) {
+            Portfolio.loadAll(rows);
+            next();
+          });
+        });
+      }
     });
-  };
-
-  Portfolio.numWordsAll = function() {
-    return Portfolio.portfolios.map(function(article) {
-      return article.body.match(/\w+/g).length;
-    })
-    .reduce(function(acc, curr) {
-      return acc + curr;
-    }, 0);
   };
 
   Portfolio.allAuthors = function() {
     return Portfolio.portfolios.map(function(article) {
-      return article.author;
+      return portfolio.author;
     })
-    .reduce(function(uniqueAuthors, author){
-      if (uniqueAuthors.indexOf(author) < 0) {
-        uniqueAuthors.push(author);
-      };
-      return uniqueAuthors;
+    .reduce(function(names, name){
+      if (names.indexOf(name) < 0) {
+        name.push(name);
+      }
+      return names;
     }, []);
+  };
+
+  Portfolio.numWordsAll = function() {
+    return Portfolio.portfolios.map(function(article) {
+      return portfolio.body.match(/\w+/g).length;
+    })
+    .reduce(function(a, b) {
+      return a + b;
+    });
   };
 
   Portfolio.numWordsByAuthor = function() {
@@ -79,17 +121,18 @@
       console.log(author);
       return {
         name: author,
-        numWords: Portfolio.portfolios.filter(function(curArticle) {
-          if (author === curArticle.author) {return true;}
+        numWords: Portfolio.portfolios.filter(function(a) {
+          return a.author === author;
         })
-        .map(function(curArticle) {
-          return curArticle.body.match(/\w+/g).length;
+        .map(function(a) {
+          return a.body.match(/\w+/g).length;
         })
-        .reduce(function(acc, cur) {
-          return acc + cur;
+        .reduce(function(a, b) {
+          return a + b;
         }, 0)
       };
     });
   };
+  Portfolio.createTable();
   module.Portfolio = Portfolio;
 })(window);

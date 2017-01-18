@@ -6,11 +6,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/normalize.css">
-    <!--link rel="stylesheet" href="styles/icons.css"-->
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/module.css">
-    <link rel="stylesheet" href="styles/normalize.css">
     <script id="article-template" type="text/x-handlebars-template">
       <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
         <header>
@@ -47,8 +45,8 @@
       <nav class="nav-menu">
         <div class="icon-menu"></div>
         <ul class="tab-list">
-          <li class="tab" data-content="articles"><a href="#" class="icon-home"> Home</a></li>
-          <li class="tab" data-content="about"><a href="#" class="icon-woman"> About</a></li>
+          <li class="tab" data-content="articles"><a href="/" class="icon-home"> Home</a></li>
+          <li class="tab" data-content="about"><a href="/about" class="icon-woman"> About</a></li>
           <li><a href="https://www.facebook.com" target="_blank" class="icon-facebook2"> Facebook</a></li>
           <li><a href="https://github.com/Clairefollett" target="_blank" class="icon-github"> GitHub</a></li>
         </ul>
@@ -87,13 +85,21 @@
     </main>
     <footer>
     </footer>
+    <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="vendor/jQuery-2.1.4.js"></script>
     <script src="vendor/handlebars.js"></script>
     <srcipt src="vendor/marked.js"></script>
-    <!--script type="text/javascript" src="scripts/portfolioDocuments.js"></script-->
     <script src="data/portfolio.json"></script>
+    <script src="vendor/html5sql.js"></script>
+    <script src="vendor/webdb.js"></script>
+    <!-- Model Files -->
     <script type="text/javascript" src="scripts/models/portfolio.js"></script>
+    <!-- View Files -->
     <script type="text/javascript" src="scripts/views/portfolioView.js"></script>
-    <script type="text/javascript" src="scripts/views/indexPage.js"></script>
+    <!-- Controller Files -->
+    <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/portfolioController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/routes.js"></script>
   </body>
 </html>
