@@ -1,4 +1,5 @@
-page('/about', aboutController.reveal);
-page('/', portfolioController.reveal);
+page('/', portfolioController.index);
+page('/about', aboutController.index);
+page('/admin', adminController.index);
 
 page();

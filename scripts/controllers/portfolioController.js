@@ -1,9 +1,9 @@
 (function(module) {
   var portfolioController = {};
 
-  portfolioController.reveal = function () {
-    $('section[id="about"]').hide();
-    $('section[id="articles"]').show();
+  portfolioController.index = function () {
+    $('.tab-content').hide();
+    $('#articles').fadeIn();
   };
 
   module.portfolioController = portfolioController;

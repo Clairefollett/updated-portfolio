@@ -1,18 +1,11 @@
 (function(module) {
   function Portfolio (opts) {
-    Object.keys(opts).forEach(function(element) {
+    Object.keys(opts).forEach(function(element, index, keys) {
       this[element] = opts[element];
     }, this);
   }
 
   Portfolio.portfolios = [];
-
-  Portfolio.prototype.toHtml = function (scriptTemplateId) {
-    var template = Handlebars.compile($(scriptTemplateId).text());
-    this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
-    this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
-    return template(this);
-  };
 
   Portfolio.createTable = function () {
     webDB.execute(
@@ -57,7 +50,6 @@
     );
   };
 
-  //updaterecord
   Portfolio.prototype.updateRecord = function () {
     webDB.execute(
       [
@@ -75,11 +67,12 @@
     });
   };
 
-  Portfolio.fetchAll = function(next) {
+  Portfolio.fetchAll = function() {
     webDB.execute('SELECT * FROM portfolios ORDER BY publishedOn DESC', function(rows) {
       if (rows.length) {
         Portfolio.loadAll(rows);
-        next();
+        portfolioView.renderIndex();
+        portfolioView.initAdminPage();
       } else {
         $.getJSON('/data/portfolio.json', function(rawData) {
           rawData.forEach(function(item) {
@@ -88,7 +81,8 @@
           });
           webDB.execute('SELECT * FROM portfolios ORDER BY publishedOn DESC', function(rows) {
             Portfolio.loadAll(rows);
-            next();
+            portfolioView.renderIndex();
+            portfolioView.initAdminPage();
           });
         });
       }
@@ -97,11 +91,11 @@
 
   Portfolio.allAuthors = function() {
     return Portfolio.portfolios.map(function(article) {
-      return portfolio.author;
+      return article.author;
     })
     .reduce(function(names, name){
-      if (names.indexOf(name) < 0) {
-        name.push(name);
+      if (names.indexOf(name) === -1) {
+        names.push(name);
       }
       return names;
     }, []);
@@ -109,7 +103,7 @@
 
   Portfolio.numWordsAll = function() {
     return Portfolio.portfolios.map(function(article) {
-      return portfolio.body.match(/\w+/g).length;
+      return article.body.match(/\w+/g).length;
     })
     .reduce(function(a, b) {
       return a + b;
@@ -129,10 +123,11 @@
         })
         .reduce(function(a, b) {
           return a + b;
-        }, 0)
+        })
       };
     });
   };
   Portfolio.createTable();
+  Portfolio.fetchAll();
   module.Portfolio = Portfolio;
 })(window);
