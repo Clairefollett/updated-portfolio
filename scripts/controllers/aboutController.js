@@ -1,10 +1,9 @@
 (function(module) {
   var aboutController = {};
 
-  aboutController.reveal = function() {
-    $('section[id="articles"]').hide();
-    $('section[id="about"]').show();
+  aboutController.index = function() {
+    $('#about').fadeIn().siblings().hide();
   };
-
+    
   module.aboutController = aboutController;
 })(window);

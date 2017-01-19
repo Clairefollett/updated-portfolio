@@ -19,7 +19,7 @@
           </div>
         </header>
         <section class="article-body">{{{body}}}</section>
-        <a href="" class="read-on">Read on &rarr;</a>
+        <a href="#" class="read-on">Read on &rarr;</a>
       </article>
     </script>
     <script id="author-filter-template" type="text/x-handlebars-template">
@@ -28,6 +28,21 @@
      <script id="category-filter-template" type="text/x-handlebars-template">
       <option value="{{category}}">{{category}}</option>
      </script>
+     <script id="author-template" type="text/x-handlebars-template">
+       <li><strong>{{name}}</strong>:{{numWords}} words written</li>
+    </script>
+    <script id="repo-template" type="text/x-handlebars-template">
+      <li>
+        <a href="{{html_url}}" target="_blank"><h3>{{name}}</h3></a>
+        <p>Description: {{description}}</p>
+        <p>Primary Language: {{language}}</p>
+        <p>Created: {{created_at}}</p>
+        <p>Last Updated: {{updated_at}}</p>
+        {{#if watchers_count}}
+          <p>{{watchers}} watching this repo</p>
+        {{/if}}
+      </li>
+    </script>
   </head>
   <body>
     <header class="site-header clearfix">
@@ -47,6 +62,7 @@
         <ul class="tab-list">
           <li class="tab" data-content="articles"><a href="/" class="icon-home"> Home</a></li>
           <li class="tab" data-content="about"><a href="/about" class="icon-woman"> About</a></li>
+          <li class="tab" data-content="admin"><a href="/admin" class="icon-rocket">Admin</a></li>
           <li><a href="https://www.facebook.com" target="_blank" class="icon-facebook2"> Facebook</a></li>
           <li><a href="https://github.com/Clairefollett" target="_blank" class="icon-github"> GitHub</a></li>
         </ul>
@@ -74,17 +90,26 @@
           Claire's Portfolio
         </header>
         <section>
-          <h1>About Me:</h1>
+          <h1>Check out my projects on Github:</h1>
           <ul>
-            <li>Coding</li>
-            <li>Schnoodles</li>
-            <li>Family and friends!</li>
+            <li>Github projects go here</li>
           </ul>
         </section>
+      </section>
+      <section id="blog-stats" class="tab-content">
+        <h1>Blog Stats</h1>
+        <dt>Total articles:</dt> <dd class="articles"></dd>
+        <dt>Total words:</dt> <dd class="words"></dd>
+        <h2>Author Stats</h2>
+        <p><em>Details on who is writing, and how much writing they are doing...</em></p>
+        <ul class="author-stats">
+        </ul>
       </section>
     </main>
     <footer>
     </footer>
+
+    <!-- Vendor Files -->
     <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
     <script src="vendor/jQuery-2.1.4.js"></script>
@@ -93,13 +118,19 @@
     <script src="data/portfolio.json"></script>
     <script src="vendor/html5sql.js"></script>
     <script src="vendor/webdb.js"></script>
+    <!-- Token which should be gitignored -->
+    <script src="scripts/controllers/token.js"></script>
     <!-- Model Files -->
     <script type="text/javascript" src="scripts/models/portfolio.js"></script>
+    <script type="text/javascript" src="scripts/models/repo.js"></script>
     <!-- View Files -->
     <script type="text/javascript" src="scripts/views/portfolioView.js"></script>
+    <script type="text/javascript" src="scripts/views/adminView.js"></script>
+    <script type="text/javascript" src="scripts/views/repoView.js"></script>
     <!-- Controller Files -->
-    <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>
     <script type="text/javascript" src="scripts/controllers/portfolioController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/adminController.js"></script>
     <script type="text/javascript" src="scripts/controllers/routes.js"></script>
   </body>
 </html>
